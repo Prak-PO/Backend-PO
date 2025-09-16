@@ -1,18 +1,20 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend_PO.Models
 {
     public class Feedback
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public int Rating { get; set; }
         public string? Notes { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public Guid UserId { get; set; }
+        [Required]
+        public int UserId { get; set; }
         public User User { get; set; } = null!;
-
-        public Guid KursId { get; set; }
+        [Required]
+        public int KursId { get; set; }
         public Kurs Kurs { get; set; } = null!;
     }
 }

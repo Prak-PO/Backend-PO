@@ -1,3 +1,4 @@
+using Backend_PO.DTOs.Requests;
 using Backend_PO.Interfaces;
 using Backend_PO.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace Backend_PO.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _userService.GetByIdAsync(id);
 
@@ -42,8 +43,30 @@ namespace Backend_PO.Controllers
             return CreatedAtAction("GetUser", new { id = created.Id }, created);
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            // ѕровер€ем, что запрос содержит данные
+            if (request == null || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest(new { message = "Invalid request data" });
+            }
+
+            // ѕровер€ем учетные данные через сервис
+            var loginResult = await _userService.LoginAsync(request);
+
+            // ≈сли пользователь не найден или пароль неверный, возвращаем ошибку
+            if (!loginResult.Success)
+            {
+                return Unauthorized(new { message = loginResult.Message });
+            }
+
+            // ≈сли все хорошо, возвращаем успешный ответ
+            return Ok(new { message = "Login successful", userName = loginResult.UserName });
+        }
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(Guid id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
             {
@@ -55,7 +78,7 @@ namespace Backend_PO.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             var ok = await _userService.DeleteAsync(id);
             return ok ? NoContent() : NotFound();
