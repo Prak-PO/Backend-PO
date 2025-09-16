@@ -22,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();       // Пример уже добавленного сервиса
 builder.Services.AddScoped<ICommentService, CommentService>(); // Добавляем новый сервис
 builder.Services.AddScoped<IKursService, KursService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 var app = builder.Build();
 
