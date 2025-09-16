@@ -1,0 +1,3 @@
+[33m879a591[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32m1-backend-entities-setup[m[33m)[m Models: (User, Kurs, Comment, Feedback) + AppDbContext + Npgsql config
+[33mc064640[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/1-backend-entities-setup[m[33m, [m[1;32mmaster[m[33m)[m Добавьте файлы проекта.
+[33m2320937[m Добавить .gitattributes, .gitignore и README.md.

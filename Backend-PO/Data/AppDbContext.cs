@@ -31,10 +31,7 @@ namespace Backend_PO.Data
                 entity.HasKey(k => k.Id);
                 entity.Property(k => k.Title).IsRequired().HasMaxLength(200);
                 entity.Property(k => k.Description).HasMaxLength(4000);
-                entity.HasOne(k => k.Author)
-                      .WithMany(u => u.AuthoredCourses)
-                      .HasForeignKey(k => k.AuthorId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(k => k.VideoUrl).IsRequired().HasMaxLength(1000);
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -42,11 +39,11 @@ namespace Backend_PO.Data
                 entity.HasKey(c => c.Id);
                 entity.Property(c => c.Content).IsRequired().HasMaxLength(2000);
                 entity.HasOne(c => c.User)
-                      .WithMany(u => u.Comments)
+                      .WithMany() // убраны навигации из User
                       .HasForeignKey(c => c.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(c => c.Kurs)
-                      .WithMany(k => k.Comments)
+                      .WithMany() // убраны навигации из Kurs
                       .HasForeignKey(c => c.KursId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
@@ -57,11 +54,11 @@ namespace Backend_PO.Data
                 entity.Property(f => f.Rating).IsRequired();
                 entity.HasCheckConstraint("CK_Feedback_Rating_Range", "\"Rating\" >= 1 AND \"Rating\" <= 5");
                 entity.HasOne(f => f.User)
-                      .WithMany(u => u.Feedbacks)
+                      .WithMany() // убраны навигации из User
                       .HasForeignKey(f => f.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(f => f.Kurs)
-                      .WithMany(k => k.Feedbacks)
+                      .WithMany() // убраны навигации из Kurs
                       .HasForeignKey(f => f.KursId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
