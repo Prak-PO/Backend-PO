@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Backend_PO.Interfaces;
+using Backend_PO.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Backend_PO.Data.AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+// DI
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
