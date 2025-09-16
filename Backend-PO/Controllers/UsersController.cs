@@ -16,14 +16,12 @@ namespace Backend_PO.Controllers
             _userService = userService;
         }
 
-        // GET: api/users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _userService.GetAllAsync();
         }
 
-        // GET: api/users/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(Guid id)
         {
@@ -37,7 +35,6 @@ namespace Backend_PO.Controllers
             return user;
         }
 
-        // POST: api/users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -45,7 +42,6 @@ namespace Backend_PO.Controllers
             return CreatedAtAction("GetUser", new { id = created.Id }, created);
         }
 
-        // PUT: api/users/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(Guid id, User user)
         {
@@ -58,7 +54,6 @@ namespace Backend_PO.Controllers
             return ok ? NoContent() : NotFound();
         }
 
-        // DELETE: api/users/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
