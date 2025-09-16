@@ -1,3 +1,5 @@
+using Backend_PO.DTOs.Requests;
+using Backend_PO.DTOs.Responses;
 using Backend_PO.Models;
 
 namespace Backend_PO.Interfaces
@@ -5,10 +7,11 @@ namespace Backend_PO.Interfaces
     public interface IUserService
     {
         Task<List<User>> GetAllAsync();
-        Task<User?> GetByIdAsync(Guid id);
+        Task<User?> GetByIdAsync(int id);
         Task<User> CreateAsync(User user);
         Task<bool> UpdateAsync(User user);
-        Task<bool> DeleteAsync(Guid id);
+        Task<LoginResponse> LoginAsync(LoginRequest request);
+        Task<bool> DeleteAsync(int id);
     }
 }
 

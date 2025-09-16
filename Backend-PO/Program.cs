@@ -1,22 +1,26 @@
 using Microsoft.EntityFrameworkCore;
-using Backend_PO.Interfaces;
-using Backend_PO.Service;
+using Backend_PO.Interfaces; // Пространство имен для интерфейсов
+using Backend_PO.Services;   // Пространство имен для реализаций сервисов
+using Backend_PO.Data;
+using Backend_PO.Service;       // Пространство имен для контекста базы данных
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle  
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Database
-builder.Services.AddDbContext<Backend_PO.Data.AppDbContext>(options =>
+// Database configuration
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// DI
-builder.Services.AddScoped<IUserService, UserService>();
+// Dependency Injection: регистрация интерфейсов и их реализаций
+builder.Services.AddScoped<IUserService, UserService>();       // Пример уже добавленного сервиса
+builder.Services.AddScoped<ICommentService, CommentService>(); // Добавляем новый сервис
 
 var app = builder.Build();
 

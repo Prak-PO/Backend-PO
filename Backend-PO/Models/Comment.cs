@@ -1,17 +1,19 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend_PO.Models
 {
     public class Comment
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public Guid UserId { get; set; }
+        [Required]
+        public int UserId { get; set; }
         public User User { get; set; } = null!;
-
-        public Guid KursId { get; set; }
+        [Required]
+        public int KursId { get; set; }
         public Kurs Kurs { get; set; } = null!;
     }
 }
