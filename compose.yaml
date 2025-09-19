@@ -1,0 +1,22 @@
+﻿services:
+  api:
+    build: .
+    ports:
+      - "8090:8080"  # Внешний порт 8080 → внутренний 80 API
+    environment:
+      - CONNECTION_STRING=Host=postgres;Database=MyAppDb;Username=postgres;Password=postgres
+    depends_on:
+      - postgres
+    restart: on-failure
+
+  postgres:
+    image: postgres:15
+    ports:
+      - "27018:27017"  # Открываем порт PostgreSQL для внешнего доступа
+    environment:
+      POSTGRES_DB: MyAppDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0206
+    volumes:
+      - postgres_/var/lib/postgresql/data
+

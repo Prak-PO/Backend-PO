@@ -10,7 +10,7 @@ namespace Backend_PO.Interfaces
         Task<User?> GetByIdAsync(int id);
         Task<User> CreateAsync(User user);
         Task<bool> UpdateAsync(User user);
-        Task<LoginResponse> LoginAsync(LoginRequest request);
+        Task<User?> LoginAsync(LoginRequest request);
         Task<bool> DeleteAsync(int id);
     }
 }

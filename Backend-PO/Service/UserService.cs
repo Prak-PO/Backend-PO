@@ -49,29 +49,15 @@ namespace Backend_PO.Service
             }
         }
 
-        public async Task<LoginResponse> LoginAsync(LoginRequest request)
+        public async Task<User?> LoginAsync(LoginRequest request)
         {
-            // Ищем пользователя в базе данных по email и паролю
+            if (request == null || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+                return null;
+
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == request.Email && u.Password == request.Password);
 
-            // Если пользователь не найден, возвращаем ошибку
-            if (user == null)
-            {
-                return new LoginResponse
-                {
-                    Success = false,
-                    Message = "Invalid email or password"
-                };
-            }
-
-            // Если пользователь найден, возвращаем успешный результат
-            return new LoginResponse
-            {
-                Success = true,
-                Message = "Login successful",
-                UserName = user.Name
-            };
+            return user; // Р’РѕР·РІСЂР°С‰Р°РµРј null, РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅ, РёР»Рё РѕР±СЉРµРєС‚ User
         }
 
         public async Task<bool> DeleteAsync(int id)

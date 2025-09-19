@@ -2,7 +2,6 @@ using Backend_PO.DTOs.Requests;
 using Backend_PO.Interfaces;
 using Backend_PO.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend_PO.Controllers
 {
@@ -46,23 +45,19 @@ namespace Backend_PO.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            // ѕровер€ем, что запрос содержит данные
             if (request == null || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
             {
                 return BadRequest(new { message = "Invalid request data" });
             }
 
-            // ѕровер€ем учетные данные через сервис
-            var loginResult = await _userService.LoginAsync(request);
+            var user = await _userService.LoginAsync(request);
 
-            // ≈сли пользователь не найден или пароль неверный, возвращаем ошибку
-            if (!loginResult.Success)
+            if (user == null)
             {
-                return Unauthorized(new { message = loginResult.Message });
+                return Unauthorized(new { message = "Invalid email or password" });
             }
 
-            // ≈сли все хорошо, возвращаем успешный ответ
-            return Ok(new { message = "Login successful", userName = loginResult.UserName });
+            return Ok(user); 
         }
 
         [HttpPut("{id}")]
