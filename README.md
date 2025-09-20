@@ -4,7 +4,7 @@
 ![API](https://img.shields.io/badge/API-REST-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Swagger](https://img.shields.io/badge/docs-Swagger%20UI-brightgreen)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
 
 Backend-сервер для приложения **SoftScills** — RESTful API на ASP.NET Core, который управляет данными пользователей, прогрессом по soft skills, заданиями, дневниками и отчётами. Предназначен для взаимодействия с WPF-клиентом, а также потенциально — с мобильными и веб-приложениями.
 
