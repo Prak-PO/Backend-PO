@@ -43,5 +43,5 @@ Backend-сервер для приложения **SoftScills** — RESTful API 
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/ваш-аккаунт/SoftScills-Backend.git
-cd SoftScills-Backend
+git clone https://github.com/Prak-PO/Backend-PO.git
+cd Backend-PO
