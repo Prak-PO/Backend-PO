@@ -37,7 +37,6 @@ namespace Backend_PO.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateComment([FromBody] CreateCommentRequest request)
         {
-            // Создаем новый комментарий
             var comment = new Comment
             {
                 Content = request.Content,
@@ -57,7 +56,6 @@ namespace Backend_PO.Controllers
             if (existingComment == null)
                 return NotFound();
 
-            // Обновляем только те поля, которые указаны
             existingComment.Content = request.Content;
             if (request.UserId.HasValue)
                 existingComment.UserId = request.UserId.Value;

@@ -10,7 +10,7 @@ namespace Backend_PO.Data
         }
 
         public DbSet<User> Users => Set<User>();
-        public DbSet<Kurs> Kursy => Set<Kurs>();
+        public DbSet<Kurs> Kurs => Set<Kurs>();
         public DbSet<Comment> Comments => Set<Comment>();
         public DbSet<Feedback> Feedbacks => Set<Feedback>();
 
